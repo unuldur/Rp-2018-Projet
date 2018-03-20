@@ -1,5 +1,6 @@
-cmake_minimum_required(VERSION 3.6)
-project(ProjetRp)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 -pthread")
-set(SOURCE_FILES )
-add_executable(ProjetRp ${SOURCE_FILES})
+cmake_minimum_required(VERSION 3.9)
+project(projet)
+
+set(CMAKE_CXX_STANDARD 17)
+
+add_executable(projet main.cpp)
