@@ -2,5 +2,12 @@ cmake_minimum_required(VERSION 3.9)
 project(projet)
 
 set(CMAKE_CXX_STANDARD 17)
+set (Boost_NO_BOOST_CMAKE ON)
 
-add_executable(projet main.cpp)
+FIND_PACKAGE( Boost 1.66 REQUIRED)
+INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIRS} )
+
+add_executable(projet main.cpp src/Individu.cpp src/Individu.h src/Fitness.h src/Graph.h src/SimpleFitness.cpp src/SimpleFitness.h)
+
+TARGET_LINK_LIBRARIES(projet LINK_PUBLIC ${Boost_LIBRARIES} )
+
