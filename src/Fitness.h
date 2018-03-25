@@ -11,7 +11,7 @@
 
 class Fitness {
 public:
-    virtual int calculeCout(const Individu *,Graph &, std::vector<Vertex> ) const = 0;
+    virtual int calculeCout(const Individu *,const Graph *,std::vector<Vertex> ) const = 0;
 };
 
 

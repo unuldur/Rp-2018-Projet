@@ -27,15 +27,13 @@ static void printGraph(Graph g, char* file){
     fout << "}\n";
 }
 
-int SimpleFitness::calculeCout(const Individu *individu, Graph &completeGraph, std::vector<Vertex> T) const {
-
+int SimpleFitness::calculeCout(const Individu * individu, const Graph * completeGraph, std::vector<Vertex> T) const {
     Graph g;
-    copy_graph(completeGraph, g);
+    copy_graph(*completeGraph, g);
     int id = individu->getId();
     for (int j = T.size() - 1; j >= 0; --j) {
         int b = id & 0x1;
         if(b == 0){
-            std::cout << T[j] << " ";
             clear_vertex(T[j], g);
             remove_vertex(T[j], g);
         }
@@ -47,8 +45,6 @@ int SimpleFitness::calculeCout(const Individu *individu, Graph &completeGraph, s
     if(connected_components(g, &component[0]) > 1){
         connected = false;
     };
-
-    printGraph(g, "g.dot");
 
 
     std::vector<Edge> spanning_tree;
@@ -73,15 +69,10 @@ int SimpleFitness::calculeCout(const Individu *individu, Graph &completeGraph, s
 
     }
 
-
     if(connected) {
-        std::cout << "connected = true edges = " << edges_number << " vertice = " << vertice_number  << std::endl;
         return fitness;
     }
     else {
-        std::cout << "connected = false edges = " << edges_number << " vertice = " << vertice_number  << std::endl;
         return fitness + M * (vertice_number - 1 - edges_number);
     }
 }
-
-

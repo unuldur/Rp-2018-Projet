@@ -7,7 +7,7 @@ set (Boost_NO_BOOST_CMAKE ON)
 FIND_PACKAGE( Boost 1.66 REQUIRED)
 INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIRS} )
 
-add_executable(projet main.cpp src/Individu.cpp src/Individu.h src/Fitness.h src/Graph.h src/SimpleFitness.cpp src/SimpleFitness.h)
+add_executable(projet main.cpp src/Individu.cpp src/Individu.h src/Fitness.h src/Graph.h src/SimpleFitness.cpp src/SimpleFitness.h src/local/Voisin.h src/local/SimpleVoisin.cpp src/local/SimpleVoisin.h src/local/RechercheLocal.cpp src/local/RechercheLocal.h)
 
 TARGET_LINK_LIBRARIES(projet LINK_PUBLIC ${Boost_LIBRARIES} )
 

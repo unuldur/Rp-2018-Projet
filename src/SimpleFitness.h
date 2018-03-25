@@ -8,10 +8,10 @@
 
 #include "Fitness.h"
 
-class SimpleFitness : Fitness{
+class SimpleFitness : public Fitness{
 public:
     static const int M = 1000000000;
-    int calculeCout(const Individu *,Graph &, std::vector<Vertex> ) const override;
+    int calculeCout(const Individu *,const Graph *, std::vector<Vertex> ) const override;
 };
 
 
