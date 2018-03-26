@@ -7,6 +7,7 @@
 #include "src/local/SimpleVoisin.h"
 #include "src/local/Voisin.h"
 #include "src/local/RechercheLocal.h"
+#include "src/generate/Steiner.h"
 
 using namespace std;
 int main() {
@@ -23,9 +24,10 @@ int main() {
 
     Fitness * f = new SimpleFitness();
     Individu p(0b0000);
+    std::vector<Vertex> nT;
     std::vector<Vertex> T;
 
-    //Creation de non(T)
+    //Creation de non(nT)
     typedef property_map<Graph, vertex_index_t>::type IndexMap;
     IndexMap index = get(vertex_index, g);
 
@@ -35,25 +37,31 @@ int main() {
         Vertex v = *vp.first;
         if(index[v] >= 5)
         {
+            nT.push_back(v);
+        }else{
             T.push_back(v);
         }
     }
 
     //Calcule du cout de l'individu premier
-    int val = f->calculeCout(&p, &g, T);
+    int val = f->calculeCout(&p, &g, nT);
     p.setCout(val);
     cout << "fitness = " << val << endl;
 
     //Test voisin
     Voisin * v = new SimpleVoisin(f);
-    std::vector<Individu> voisins = v->getVoisin(&p, &g, T);
+    std::vector<Individu> voisins = v->getVoisin(&p, &g, nT);
     for(Individu i : voisins){
         cout << "id = " << i.getId() << " cout = " << i.getCout() << endl;
     }
 
     //Test recherche local
     RechercheLocal l(v);
-    Individu best = l.recherche(&p, &g, T);
+    Individu best = l.recherche(&p, &g, nT);
     cout << "best : id = " << best.getId() << " cout = " << best.getCout() << endl;
+
+    //Steiner
+    Steiner s;
+    s.generate(&g, T, nT);
     return 0;
 }
