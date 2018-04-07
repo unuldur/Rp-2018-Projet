@@ -18,7 +18,7 @@ private:
 public:
     virtual ~SimpleVoisin();
     SimpleVoisin(Fitness *fitness);
-    std::vector<Individu> getVoisin(const Individu *individu, const Graph *graph1, std::vector<Vertex> vector) const override;
+    std::vector<Individu> getVoisin(const Individu &individu, const Graph &graph1, const std::vector<Vertex> &vector) const override;
 };
 
 

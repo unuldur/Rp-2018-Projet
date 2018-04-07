@@ -11,7 +11,7 @@
 
 class Generate {
 public:
-    virtual Individu generate(const Graph *,std::vector<Vertex> T,std::vector<Vertex> nT) const = 0;
+    virtual Individu generate(const Graph &, const std::vector<Vertex> &T, const std::vector<Vertex> &nT) const = 0;
 };
 
 

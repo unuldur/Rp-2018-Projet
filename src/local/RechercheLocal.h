@@ -16,7 +16,7 @@ private:
 public:
     virtual ~RechercheLocal();
     RechercheLocal(Voisin *voisin);
-    Individu recherche(const Individu *,const Graph *,std::vector<Vertex> ) const;
+    Individu recherche(const Individu &individu, const Graph &g, const std::vector<Vertex> &T) const;
 };
 
 

@@ -11,6 +11,6 @@
 
 class Voisin {
 public:
-    virtual std::vector<Individu> getVoisin(const Individu *,const Graph *,std::vector<Vertex> ) const = 0;
+    virtual std::vector<Individu> getVoisin(const Individu &, const Graph &, const std::vector<Vertex> &) const = 0;
 };
 #endif //PROJET_VOISIN_H

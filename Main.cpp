@@ -44,24 +44,24 @@ int main() {
     }
 
     //Calcule du cout de l'individu premier
-    int val = f->calculeCout(&p, &g, nT);
+    int val = f->calculeCout(p, g, nT);
     p.setCout(val);
     cout << "fitness = " << val << endl;
 
     //Test voisin
     Voisin * v = new SimpleVoisin(f);
-    std::vector<Individu> voisins = v->getVoisin(&p, &g, nT);
+    std::vector<Individu> voisins = v->getVoisin(p, g, nT);
     for(Individu i : voisins){
         cout << "id = " << i.getId() << " cout = " << i.getCout() << endl;
     }
 
     //Test recherche local
     RechercheLocal l(v);
-    Individu best = l.recherche(&p, &g, nT);
+    Individu best = l.recherche(p, g, nT);
     cout << "best : id = " << best.getId() << " cout = " << best.getCout() << endl;
 
     //Steiner
     Steiner s;
-    s.generate(&g, T, nT);
+    s.generate(g, T, nT);
     return 0;
 }

@@ -10,7 +10,7 @@
 
 class Steiner : public Generate{
 public:
-    Individu generate(const Graph *g, std::vector<Vertex> T, std::vector<Vertex> nT) const override;
+    Individu generate(const Graph &g, const std::vector<Vertex> &T, const std::vector<Vertex> &nT) const override;
 };
 
 

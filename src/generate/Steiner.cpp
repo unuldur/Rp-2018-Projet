@@ -41,18 +41,18 @@ int findWidth(Graph g, Vertex d, Vertex d2){
     }
 }
 
-Individu Steiner::generate(const Graph *g, std::vector<Vertex> T, std::vector<Vertex> nT) const {
+Individu Steiner::generate(const Graph &g, const std::vector<Vertex> &T, const std::vector<Vertex> &nT) const {
     //Construction G1
     const int n = T.size();
     std::vector<E> edges;
     std::vector<int> weights;
     std::vector<std::vector<Vertex>> parents;
     for (int j = 0; j < n; ++j) {
-        std::vector<Vertex > p(num_vertices(*g));
-        std::vector<int> d(num_vertices(*g));
-        Vertex s = vertex(T[j], *g);
-        dijkstra_shortest_paths(*g, s,
-                                predecessor_map(boost::make_iterator_property_map(p.begin(), get(boost::vertex_index, *g))).distance_map(boost::make_iterator_property_map(d.begin(), get(boost::vertex_index, *g))));
+        std::vector<Vertex > p(num_vertices(g));
+        std::vector<int> d(num_vertices(g));
+        Vertex s = vertex(T[j], g);
+        dijkstra_shortest_paths(g, s,
+                                predecessor_map(boost::make_iterator_property_map(p.begin(), get(boost::vertex_index, g))).distance_map(boost::make_iterator_property_map(d.begin(), get(boost::vertex_index, g))));
         parents.push_back(p);
         for (int k = j; k < n; ++k) {
             if (j == k) continue;
@@ -71,7 +71,7 @@ Individu Steiner::generate(const Graph *g, std::vector<Vertex> T, std::vector<Ve
     std::vector<int> weightsG3;
     std::vector<E> edgesG3;
     std::set<Vertex> sommets;
-    auto weh = get(edge_weight, *g);
+    auto weh = get(edge_weight, g);
     for(Edge e: g2){
         Vertex src = source(e, g1);
         std::vector<Vertex> p = parents[src];
@@ -79,7 +79,7 @@ Individu Steiner::generate(const Graph *g, std::vector<Vertex> T, std::vector<Ve
         do{
             if(std::find(edgesG3.begin(), edgesG3.end(), E(p[tmp], tmp)) == edgesG3.end()){
                 edgesG3.emplace_back(p[tmp], tmp);
-                weightsG3.push_back(findWidth(*g, p[tmp], tmp));
+                weightsG3.push_back(findWidth(g, p[tmp], tmp));
                 sommets.insert(tmp);
                 sommets.insert(p[tmp]);
             }

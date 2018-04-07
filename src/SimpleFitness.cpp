@@ -27,10 +27,10 @@ static void printGraph(Graph g, char* file){
     fout << "}\n";
 }
 
-int SimpleFitness::calculeCout(const Individu * individu, const Graph * completeGraph, std::vector<Vertex> T) const {
+int SimpleFitness::calculeCout(const Individu & individu, const Graph & completeGraph, const std::vector<Vertex> & T) const {
     Graph g;
-    copy_graph(*completeGraph, g);
-    int id = individu->getId();
+    copy_graph(completeGraph, g);
+    int id = individu.getId();
     for (int j = T.size() - 1; j >= 0; --j) {
         int b = id & 0x1;
         if(b == 0){
