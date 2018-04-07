@@ -9,8 +9,8 @@
 std::vector<Individu> SimpleVoisin::getVoisin(const Individu &individu, const Graph &graph,
                                               const std::vector<Vertex> &v) const {
     std::vector<Individu> voisin;
-    int id = individu.getId();
-    int b = 0x1;
+    unsigned long id = individu.getId();
+    unsigned long b = 0x1;
     for (int j = v.size() - 1; j >= 0; --j) {
         voisin.emplace_back(id^b);
         b = b << 1;

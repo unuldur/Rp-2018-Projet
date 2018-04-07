@@ -4,7 +4,7 @@
 
 #include "Individu.h"
 
-Individu::Individu(int id) : id(id) {}
+Individu::Individu(unsigned long id) : id(id) {}
 
 int Individu::getCout() const {
     return cout;
@@ -22,6 +22,6 @@ bool Individu::operator!=(const Individu &rhs) const {
     return !(rhs == *this);
 }
 
-int Individu::getId() const {
+unsigned long Individu::getId() const {
     return id;
 }

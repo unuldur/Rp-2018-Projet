@@ -30,9 +30,9 @@ static void printGraph(Graph g, char* file){
 int SimpleFitness::calculeCout(const Individu & individu, const Graph & completeGraph, const std::vector<Vertex> & T) const {
     Graph g;
     copy_graph(completeGraph, g);
-    int id = individu.getId();
+    unsigned long id = individu.getId();
     for (int j = T.size() - 1; j >= 0; --j) {
-        int b = id & 0x1;
+        unsigned long b = id & 1;
         if(b == 0){
             clear_vertex(T[j], g);
             remove_vertex(T[j], g);

@@ -46,14 +46,14 @@ Individu Steiner::generate(const Graph &g, const std::vector<Vertex> &T, const s
     const int n = T.size();
     std::vector<E> edges;
     std::vector<int> weights;
-    std::vector<std::vector<Vertex>> parents;
+    std::map<Vertex, std::vector<Vertex>> parents;
     for (int j = 0; j < n; ++j) {
         std::vector<Vertex > p(num_vertices(g));
         std::vector<int> d(num_vertices(g));
         Vertex s = vertex(T[j], g);
         dijkstra_shortest_paths(g, s,
                                 predecessor_map(boost::make_iterator_property_map(p.begin(), get(boost::vertex_index, g))).distance_map(boost::make_iterator_property_map(d.begin(), get(boost::vertex_index, g))));
-        parents.push_back(p);
+        parents[s] = p;
         for (int k = j; k < n; ++k) {
             if (j == k) continue;
             edges.emplace_back(T[j], T[k]);
@@ -105,11 +105,11 @@ Individu Steiner::generate(const Graph &g, const std::vector<Vertex> &T, const s
             nleaf.insert(target(e, g3));
         }
     }
-    int id = 0;
+    unsigned long id = 0;
     int nTSize = nT.size();
     for(Vertex v: nleaf){
         if(std::find(nT.begin(), nT.end(), v) != nT.end()){
-            int b = int(v - n);
+            unsigned long b = v - n;
             b = nTSize - b - 1;
             id = id | (0x1 << b);
         }

@@ -9,15 +9,15 @@
 class Individu {
     private:
         int cout;
-        int id;
+        unsigned long id;
 public:
-    explicit Individu(int id);
+    explicit Individu(unsigned long id);
 
     int getCout() const;
 
     void setCout(int cout);
 
-    int getId() const;
+    unsigned long getId() const;
 
     bool operator==(const Individu &rhs) const;
 

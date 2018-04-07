@@ -10,7 +10,7 @@
 
 class SimpleFitness : public Fitness{
 public:
-    static const int M = 1000000000;
+    static const int M = 100000;
     int calculeCout(const Individu &,const Graph &,const std::vector<Vertex> &) const override;
 };
 
