@@ -4,7 +4,7 @@
 
 #include "Individu.h"
 
-Individu::Individu(unsigned long id) : id(id) {}
+Individu::Individu(std::vector<Vertex> id) : id(id) {}
 
 int Individu::getCout() const {
     return cout;
@@ -22,6 +22,6 @@ bool Individu::operator!=(const Individu &rhs) const {
     return !(rhs == *this);
 }
 
-unsigned long Individu::getId() const {
+std::vector<Vertex> Individu::getId() const {
     return id;
 }

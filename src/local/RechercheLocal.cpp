@@ -12,7 +12,7 @@ Individu RechercheLocal::recherche(const Individu &premier, const Graph &g, cons
     while(size > 0){
         int randomIndex = rand() % size;
         best = v[randomIndex];
-        std::cout << "New best : id=" << best.getId() << " cout=" <<best.getCout() << std::endl;
+        std::cout << "New best : id="  << " cout=" <<best.getCout() << std::endl;
         v = voisin->getVoisin(best, g, T);
         size = v.size();
     }

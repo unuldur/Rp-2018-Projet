@@ -3,6 +3,7 @@
 //
 
 #include "Steiner.h"
+#include "../Utils.h"
 
 #include <boost/graph/graph_traits.hpp>
 #include <boost/graph/adjacency_list.hpp>
@@ -27,18 +28,6 @@ static void printGraph(Graph g, char* file){
         fout << "[color=\"black\", label=\"" << get(edge_weight, g, *eiter) << "\"];\n";
     }
     fout << "}\n";
-}
-
-int findWidth(Graph g, Vertex d, Vertex d2){
-    graph_traits<Graph>::edge_iterator eiter, eiter_end;
-    for (boost::tie(eiter, eiter_end) = edges(g); eiter != eiter_end; ++eiter) {
-        if(source(*eiter, g) == d && target(*eiter, g) == d2){
-            return get(edge_weight, g, *eiter);
-        }
-        if(source(*eiter, g) == d2 && target(*eiter, g) == d){
-            return get(edge_weight, g, *eiter);
-        }
-    }
 }
 
 Individu Steiner::generate(const Graph &g, const std::vector<Vertex> &T, const std::vector<Vertex> &nT) const {
@@ -79,7 +68,7 @@ Individu Steiner::generate(const Graph &g, const std::vector<Vertex> &T, const s
         do{
             if(std::find(edgesG3.begin(), edgesG3.end(), E(p[tmp], tmp)) == edgesG3.end()){
                 edgesG3.emplace_back(p[tmp], tmp);
-                weightsG3.push_back(findWidth(g, p[tmp], tmp));
+                weightsG3.push_back(Utils::findWidth(g, p[tmp], tmp));
                 sommets.insert(tmp);
                 sommets.insert(p[tmp]);
             }
@@ -87,7 +76,7 @@ Individu Steiner::generate(const Graph &g, const std::vector<Vertex> &T, const s
         }while(tmp != src);
     }
     Graph g3(&edgesG3[0], &edgesG3[0] + edgesG3.size(), &weightsG3[0], sommets.size());
-
+    printGraph(g3, "steinerG3.dot");
     //Construction g4
     std::vector<Edge> g4;
     kruskal_minimum_spanning_tree(g3, std::back_inserter(g4));
@@ -105,13 +94,12 @@ Individu Steiner::generate(const Graph &g, const std::vector<Vertex> &T, const s
             nleaf.insert(target(e, g3));
         }
     }
-    unsigned long id = 0;
+    std::vector<Vertex> id;
     int nTSize = nT.size();
     for(Vertex v: nleaf){
-        if(std::find(nT.begin(), nT.end(), v) != nT.end()){
-            unsigned long b = v - n;
-            b = nTSize - b - 1;
-            id = id | (0x1 << b);
+        auto pos = std::find(nT.begin(), nT.end(), v);
+        if(pos != nT.end()){
+            id.push_back(*pos);
         }
     }
     return Individu(id);

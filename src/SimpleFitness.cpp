@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include "SimpleFitness.h"
+#include "Utils.h"
 #include <boost/graph/copy.hpp>
 #include <boost/graph/connected_components.hpp>
 #include <boost/graph/make_connected.hpp>
@@ -28,17 +29,11 @@ static void printGraph(Graph g, char* file){
 }
 
 int SimpleFitness::calculeCout(const Individu & individu, const Graph & completeGraph, const std::vector<Vertex> & T) const {
-    Graph g;
-    copy_graph(completeGraph, g);
-    unsigned long id = individu.getId();
-    for (int j = T.size() - 1; j >= 0; --j) {
-        unsigned long b = id & 1;
-        if(b == 0){
-            clear_vertex(T[j], g);
-            remove_vertex(T[j], g);
-        }
-        id = id >> 1;
-    }
+    Graph g = Utils::copyGraph(individu, completeGraph, T);
+
+    printGraph(g, "test.dot");
+    printGraph(completeGraph, "test2.dot");
+
 
     bool connected = true;
     std::vector<graph_traits<Graph>::vertices_size_type> component(num_vertices(g));

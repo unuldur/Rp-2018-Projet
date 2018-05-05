@@ -15,7 +15,7 @@ int main() {
 
     std::vector<int> terminaux;
     //test parser
-    Graph g = Parser::readGraph("../resources/B/b01.stp", &terminaux);
+    Graph g = Parser::readGraph("../resources/D/d10.stp", &terminaux);
 
     //Creation du graph
     /*
@@ -34,7 +34,6 @@ int main() {
     terminaux.push_back(1);*/
 
     Fitness * f = new SimpleFitness();
-    Individu p(0);
     std::vector<Vertex> nT;
     std::vector<Vertex> T;
 
@@ -63,15 +62,23 @@ int main() {
     Steiner s;
     Individu stein = s.generate(g, T, nT);
 
+
     //Calcule du cout de l'individu premier
     int val = f->calculeCout(stein, g, nT);
     stein.setCout(val);
     cout << "fitness = " << val << endl;
 
+    std::vector<Vertex> id = stein.getId();
+    for (int j = 0; j < id.size(); ++j) {
+        std::cout << id[j] << " | ";
+    }
+    std::cout << std::endl;
+
     //Test recherche local
+
     RechercheLocal l(v);
     Individu best = l.recherche(stein, g, nT);
-    cout << "best : id = " << best.getId() << " cout = " << best.getCout() << endl;
+    cout << "best :" << " cout = " << best.getCout() << endl;
 
     return 0;
 }

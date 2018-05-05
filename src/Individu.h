@@ -6,18 +6,20 @@
 #define PROJET_INDIVIDU_H
 
 
+#include "Graph.h"
+
 class Individu {
     private:
         int cout;
-        unsigned long id;
+        std::vector<Vertex> id;
 public:
-    explicit Individu(unsigned long id);
+    explicit Individu(std::vector<Vertex> id);
 
     int getCout() const;
 
     void setCout(int cout);
 
-    unsigned long getId() const;
+    std::vector<Vertex> getId() const;
 
     bool operator==(const Individu &rhs) const;
 
