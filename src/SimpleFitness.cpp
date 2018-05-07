@@ -12,27 +12,11 @@
 
 using namespace boost;
 
-
-static void printGraph(Graph g, char* file){
-    std::ofstream fout(file);
-    fout << "graph A {\n"
-         << " rankdir=LR\n"
-         << " size=\"3,3\"\n"
-         << " ratio=\"filled\"\n"
-         << " edge[style=\"bold\"]\n" << " node[shape=\"circle\"]\n";
-    graph_traits<Graph>::edge_iterator eiter, eiter_end;
-    for (boost::tie(eiter, eiter_end) = edges(g); eiter != eiter_end; ++eiter) {
-        fout << source(*eiter, g) << " -- " << target(*eiter, g);
-        fout << "[color=\"black\", label=\"" << get(edge_weight, g, *eiter) << "\"];\n";
-    }
-    fout << "}\n";
-}
-
 int SimpleFitness::calculeCout(const Individu & individu, const Graph & completeGraph, const std::vector<Vertex> & T) const {
     Graph g = Utils::copyGraph(individu, completeGraph, T);
 
-    printGraph(g, "test.dot");
-    printGraph(completeGraph, "test2.dot");
+    Utils::printGraph(g, "test.dot");
+    Utils::printGraph(completeGraph, "test2.dot");
 
 
     bool connected = true;

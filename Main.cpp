@@ -15,7 +15,7 @@ int main() {
 
     std::vector<int> terminaux;
     //test parser
-    Graph g = Parser::readGraph("../resources/D/d10.stp", &terminaux);
+    Graph g = Parser::readGraph("../resources/D/d13.stp", &terminaux);
 
     //Creation du graph
     /*
@@ -68,9 +68,11 @@ int main() {
     stein.setCout(val);
     cout << "fitness = " << val << endl;
 
-    std::vector<Vertex> id = stein.getId();
+    vector<bool> id = stein.getId();
     for (int j = 0; j < id.size(); ++j) {
-        std::cout << id[j] << " | ";
+        if(id[j]){
+            std::cout << nT[j] << " | ";
+        }
     }
     std::cout << std::endl;
 

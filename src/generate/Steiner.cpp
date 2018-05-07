@@ -15,21 +15,6 @@
 
 using namespace boost;
 
-static void printGraph(Graph g, char* file){
-    std::ofstream fout(file);
-    fout << "graph A {\n"
-         << " rankdir=LR\n"
-         << " size=\"3,3\"\n"
-         << " ratio=\"filled\"\n"
-         << " edge[style=\"bold\"]\n" << " node[shape=\"circle\"]\n";
-    graph_traits<Graph>::edge_iterator eiter, eiter_end;
-    for (boost::tie(eiter, eiter_end) = edges(g); eiter != eiter_end; ++eiter) {
-        fout << source(*eiter, g) << " -- " << target(*eiter, g);
-        fout << "[color=\"black\", label=\"" << get(edge_weight, g, *eiter) << "\"];\n";
-    }
-    fout << "}\n";
-}
-
 Individu Steiner::generate(const Graph &g, const std::vector<Vertex> &T, const std::vector<Vertex> &nT) const {
     //Construction G1
     const int n = T.size();
@@ -76,7 +61,7 @@ Individu Steiner::generate(const Graph &g, const std::vector<Vertex> &T, const s
         }while(tmp != src);
     }
     Graph g3(&edgesG3[0], &edgesG3[0] + edgesG3.size(), &weightsG3[0], sommets.size());
-    printGraph(g3, "steinerG3.dot");
+    Utils::printGraph(g3, "steinerG3.dot");
     //Construction g4
     std::vector<Edge> g4;
     kruskal_minimum_spanning_tree(g3, std::back_inserter(g4));
@@ -94,12 +79,12 @@ Individu Steiner::generate(const Graph &g, const std::vector<Vertex> &T, const s
             nleaf.insert(target(e, g3));
         }
     }
-    std::vector<Vertex> id;
-    int nTSize = nT.size();
+    unsigned int nTSize = nT.size();
+    std::vector<bool> id(nTSize, false);
     for(Vertex v: nleaf){
-        auto pos = std::find(nT.begin(), nT.end(), v);
-        if(pos != nT.end()){
-            id.push_back(*pos);
+        int pos = std::find(nT.begin(), nT.end(), v) - nT.begin();
+        if(pos < nTSize){
+            id[pos] = true;
         }
     }
     return Individu(id);

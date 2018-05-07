@@ -11,19 +11,19 @@
 class Individu {
     private:
         int cout;
-        std::vector<Vertex> id;
-public:
-    explicit Individu(std::vector<Vertex> id);
+        std::vector<bool> id;
+    public:
+        explicit Individu(std::vector<bool> id);
 
-    int getCout() const;
+        int getCout() const;
 
-    void setCout(int cout);
+        void setCout(int cout);
 
-    std::vector<Vertex> getId() const;
+        std::vector<bool> getId() const;
 
-    bool operator==(const Individu &rhs) const;
+        bool operator==(const Individu &rhs) const;
 
-    bool operator!=(const Individu &rhs) const;
+        bool operator!=(const Individu &rhs) const;
 };
 
 

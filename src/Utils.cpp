@@ -30,7 +30,7 @@ Graph Utils::copyGraph(const Individu &individu, const Graph &g, const std::vect
     std::set<Vertex> sommets;
     std::set<Vertex> sommetsAfter;
     std::map <Vertex, int> sommetsm;
-    std::vector<Vertex> id = individu.getId();
+    std::vector<bool> id = individu.getId();
     int ids = 0;
     for (boost::tie(eiter, eiter_end) = boost::edges(g); eiter != eiter_end; ++eiter) {
         Vertex s = source(*eiter, g);
@@ -39,10 +39,10 @@ Graph Utils::copyGraph(const Individu &individu, const Graph &g, const std::vect
         unsigned long pos_end = std::find(T.begin(), T.end(), t) - T.begin();
         bool dep = true;
         bool arr = true;
-        if(pos_deb < T.size() && std::find(id.begin(), id.end(), s) == id.end()){
+        if(pos_deb < T.size() && !id[pos_deb]){
             dep = false;
         }
-        if(pos_end < T.size() && std::find(id.begin(), id.end(), t) == id.end()){
+        if(pos_end < T.size() && !id[pos_end]){
             arr = false;
         }
         if(dep && !arr){
@@ -80,4 +80,20 @@ Graph Utils::copyGraph(const Individu &individu, const Graph &g, const std::vect
     }
 
     return Graph(&edges[0], &edges[0] + edges.size(), &weights[0], sommets.size());
+}
+
+
+void Utils::printGraph(Graph g, char* file){
+    std::ofstream fout(file);
+    fout << "graph A {\n"
+         << " rankdir=LR\n"
+         << " size=\"3,3\"\n"
+         << " ratio=\"filled\"\n"
+         << " edge[style=\"bold\"]\n" << " node[shape=\"circle\"]\n";
+    graph_traits<Graph>::edge_iterator eiter, eiter_end;
+    for (boost::tie(eiter, eiter_end) = edges(g); eiter != eiter_end; ++eiter) {
+        fout << source(*eiter, g) << " -- " << target(*eiter, g);
+        fout << "[color=\"black\", label=\"" << get(edge_weight, g, *eiter) << "\"];\n";
+    }
+    fout << "}\n";
 }
