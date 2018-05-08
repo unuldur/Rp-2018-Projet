@@ -15,10 +15,6 @@ using namespace boost;
 int SimpleFitness::calculeCout(const Individu & individu, const Graph & completeGraph, const std::vector<Vertex> & T) const {
     Graph g = Utils::copyGraph(individu, completeGraph, T);
 
-    Utils::printGraph(g, "test.dot");
-    Utils::printGraph(completeGraph, "test2.dot");
-
-
     bool connected = true;
     std::vector<graph_traits<Graph>::vertices_size_type> component(num_vertices(g));
     if(connected_components(g, &component[0]) > 1){

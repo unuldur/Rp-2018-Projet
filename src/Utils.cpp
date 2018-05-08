@@ -11,7 +11,7 @@
 #include <map>
 
 using namespace boost;
-int Utils::findWidth(Graph g, Vertex d, Vertex d2){
+int Utils::findWidth(const Graph &g,const Vertex& d,const Vertex& d2){
     graph_traits<Graph>::edge_iterator eiter, eiter_end;
     for (boost::tie(eiter, eiter_end) = edges(g); eiter != eiter_end; ++eiter) {
         if(source(*eiter, g) == d && target(*eiter, g) == d2){
@@ -21,6 +21,7 @@ int Utils::findWidth(Graph g, Vertex d, Vertex d2){
             return get(edge_weight, g, *eiter);
         }
     }
+    return 0;
 }
 
 Graph Utils::copyGraph(const Individu &individu, const Graph &g, const std::vector<Vertex> &T) {
@@ -78,6 +79,11 @@ Graph Utils::copyGraph(const Individu &individu, const Graph &g, const std::vect
             sommets.insert(t);
         }
     }
+    /*
+    for(auto p : sommetsm){
+        std::cout << p.first << "->" << p.second << " ; ";
+    }
+    std::cout << std::endl;*/
 
     return Graph(&edges[0], &edges[0] + edges.size(), &weights[0], sommets.size());
 }

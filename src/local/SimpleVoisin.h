@@ -10,9 +10,6 @@
 #include "../Fitness.h"
 
 class SimpleVoisin : public Voisin{
-public:
-
-
 private:
     Fitness * fitness;
 public:

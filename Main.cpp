@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include <fstream>
+#include <chrono>
 #include "src/Graph.h"
 #include "src/Fitness.h"
 #include "src/SimpleFitness.h"
@@ -9,13 +10,15 @@
 #include "src/local/RechercheLocal.h"
 #include "src/generate/Steiner.h"
 #include "src/parser/Parser.h"
+#include "src/generate/ArbreCouvrantMin.h"
+#include "src/generate/RandomiseGeneration.h"
 
 using namespace std;
 int main() {
 
     std::vector<int> terminaux;
     //test parser
-    Graph g = Parser::readGraph("../resources/D/d13.stp", &terminaux);
+    Graph g = Parser::readGraph("../resources/B/b07.stp", &terminaux);
 
     //Creation du graph
     /*
@@ -61,26 +64,48 @@ int main() {
     //Steiner
     Steiner s;
     Individu stein = s.generate(g, T, nT);
-
-
-    //Calcule du cout de l'individu premier
     int val = f->calculeCout(stein, g, nT);
     stein.setCout(val);
-    cout << "fitness = " << val << endl;
+    cout << "fitness steiner = " << val << endl;
 
-    vector<bool> id = stein.getId();
-    for (int j = 0; j < id.size(); ++j) {
-        if(id[j]){
-            std::cout << nT[j] << " | ";
-        }
-    }
-    std::cout << std::endl;
+    //Arbre couvrant min
+    ArbreCouvrantMin acm;
+    Individu acmi = acm.generate(g, T, nT);
+    int valacmi = f->calculeCout(acmi, g, nT);
+    acmi.setCout(valacmi);
+    cout << "fitness arbre couvrant min = " << valacmi << endl;
+
+    //Generate random;
+    RandomiseGeneration rg(&s);
+    Individu rstein = rg.generate(g, T, nT);
+    int rval = f->calculeCout(rstein, g, nT);
+    rstein.setCout(rval);
+    cout << "fitness random steiner = " << rval << endl;
+
+    //Simple individu
+
+    Individu test(std::vector<bool>(nT.size(), true));
+    int valtest = f->calculeCout(test, g, nT);
+    test.setCout(valtest);
+    cout << "fitness individu simple = " << valtest << endl;
+
 
     //Test recherche local
+    std::chrono::time_point<std::chrono::system_clock> start, end;
+    start = std::chrono::system_clock::now();
 
     RechercheLocal l(v);
     Individu best = l.recherche(stein, g, nT);
     cout << "best :" << " cout = " << best.getCout() << endl;
+
+    end = std::chrono::system_clock::now();
+
+    int elapsed_seconds = std::chrono::duration_cast<std::chrono::seconds>
+            (end-start).count();
+    std::time_t end_time = std::chrono::system_clock::to_time_t(end);
+
+    std::cout << "finished computation at " << std::ctime(&end_time)
+              << "elapsed time: " << elapsed_seconds << "s\n";
 
     return 0;
 }
