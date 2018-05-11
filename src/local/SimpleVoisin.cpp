@@ -6,6 +6,7 @@
 #include "SimpleVoisin.h"
 #include "../Fitness.h"
 #include "../thread/mingw.thread.h"
+#include "../generate/Generate.h"
 
 void calcFitness(Individu * i, int coutMax,const Graph& graph, const std::vector<Vertex>& nT, std::vector<Individu> *voisins, Fitness * fitness) {
     int cout = fitness->calculeCout(*i, graph, nT);

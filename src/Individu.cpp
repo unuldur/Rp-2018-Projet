@@ -3,7 +3,7 @@
 //
 
 #include "Individu.h"
-
+#include <limits.h>
 Individu::Individu(std::vector<bool> id) : id(id) {}
 
 int Individu::getCout() const {
@@ -24,4 +24,8 @@ bool Individu::operator!=(const Individu &rhs) const {
 
 std::vector<bool> Individu::getId() const {
     return id;
+}
+
+Individu::Individu() {
+    cout = INT_MAX;
 }

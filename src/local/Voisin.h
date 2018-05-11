@@ -8,6 +8,7 @@
 #include <vector>
 #include "../Individu.h"
 #include "../Graph.h"
+#include "../generate/Generate.h"
 
 class Voisin {
 public:

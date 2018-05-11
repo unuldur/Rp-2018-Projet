@@ -18,7 +18,7 @@ int main() {
 
     std::vector<int> terminaux;
     //test parser
-    Graph g = Parser::readGraph("../resources/B/b07.stp", &terminaux);
+    Graph g = Parser::readGraph("../resources/C/c17.stp", &terminaux);
 
     //Creation du graph
     /*
@@ -76,7 +76,7 @@ int main() {
     cout << "fitness arbre couvrant min = " << valacmi << endl;
 
     //Generate random;
-    RandomiseGeneration rg(&s);
+    RandomiseGeneration rg(&acm);
     Individu rstein = rg.generate(g, T, nT);
     int rval = f->calculeCout(rstein, g, nT);
     rstein.setCout(rval);
@@ -95,7 +95,7 @@ int main() {
     start = std::chrono::system_clock::now();
 
     RechercheLocal l(v);
-    Individu best = l.recherche(stein, g, nT);
+    Individu best = l.recherche(rg, g, T, nT, *f, 300);
     cout << "best :" << " cout = " << best.getCout() << endl;
 
     end = std::chrono::system_clock::now();

@@ -1,33 +1,33 @@
 steiner + recherche locale :
     - b01 : 0s 0d
-    - b02 : 0s 5d
+    - b02 : 0s 0d
     - b03 : 0s 0d
     - b04 : 0s 0d
     - b05 : 0s 0d
-    - b06 : 0s 2d
+    - b06 : 0s 0d
     - b07 : 0s 0d
     - b08 : 0s 0d
     - b09 : 0s 0d
-    - b10 : 0s 1d
+    - b10 : 0s 0d
     - b11 : 0s 0d
     - b12 : 0s 0d
-    - b13 : 0s 6d
-    - b14 : 0s 1d
+    - b13 : 0s 3d
+    - b14 : 0s 0d
     - b15 : 0s 0d
-    - b16 : 0s 8d
-    - b17 : 0s 1d
-    - b18 : 0s 1d
-    - c01 : 0s 3d
+    - b16 : 0s 5d
+    - b17 : 0s 0d
+    - b18 : 0s 0d
+    - c01 : 0s 0d
     - c02 : 0s 0d
     - c03 : 1s 4d
-    - c04 : 3s 11d
-    - c05 : 5s 1d
-    - c06 : 0s 5d
-    - c07 : 0s 7d
+    - c04 : 3s 10d
+    - c05 : 5s 0d
+    - c06 : 0s 0d
+    - c07 : 0s 1d
     - c08 : 5s 3d
-    - c09 : 7s 3d
+    - c09 : 7s 2d
     - c10 : 19s 0d
-    - c11 : 0s 3d
+    - c11 : 0s 1d
     - c12 : 0s 2d
     - c13 : 23s 7d
     - c14 : 44s 7d

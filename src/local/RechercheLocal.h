@@ -9,6 +9,7 @@
 #include "../Graph.h"
 #include "../Individu.h"
 #include "Voisin.h"
+#include "../Fitness.h"
 
 class RechercheLocal {
 private:
@@ -17,6 +18,8 @@ public:
     virtual ~RechercheLocal();
     RechercheLocal(Voisin *voisin);
     Individu recherche(const Individu &individu, const Graph &g, const std::vector<Vertex> &T) const;
+    Individu recherche(const Generate &individu, const Graph &g, const std::vector<Vertex> &T,
+                       const std::vector<Vertex> &nT, const Fitness &f, int timer) const;
 };
 
 

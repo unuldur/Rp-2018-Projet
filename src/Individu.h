@@ -14,6 +14,7 @@ class Individu {
         std::vector<bool> id;
     public:
         explicit Individu(std::vector<bool> id);
+        explicit Individu();
 
         int getCout() const;
 

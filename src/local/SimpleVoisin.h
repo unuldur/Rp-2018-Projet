@@ -8,6 +8,7 @@
 
 #include "Voisin.h"
 #include "../Fitness.h"
+#include "../generate/Generate.h"
 
 class SimpleVoisin : public Voisin{
 private:
