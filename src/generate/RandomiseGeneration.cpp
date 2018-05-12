@@ -3,6 +3,7 @@
 //
 
 #include <boost/graph/copy.hpp>
+#include <time.h>
 #include "RandomiseGeneration.h"
 #include "../Utils.h"
 

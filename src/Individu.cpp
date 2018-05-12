@@ -2,9 +2,11 @@
 // Created by Unuldur on 21/03/2018.
 //
 
+#include <vector>
 #include "Individu.h"
 #include <limits.h>
-Individu::Individu(std::vector<bool> id) : id(id) {}
+Individu::Individu(std::vector<bool> id) : id(id) {
+}
 
 int Individu::getCout() const {
     return cout;
@@ -28,4 +30,12 @@ std::vector<bool> Individu::getId() const {
 
 Individu::Individu() {
     cout = INT_MAX;
+}
+
+void Individu::setId(std::vector<bool> id){
+    Individu::id = id;
+}
+
+Individu::Individu(const Individu &id) : id(id.getId()), cout(id.getCout()) {
+
 }

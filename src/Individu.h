@@ -13,8 +13,9 @@ class Individu {
         int cout;
         std::vector<bool> id;
     public:
-        explicit Individu(std::vector<bool> id);
-        explicit Individu();
+        Individu(std::vector<bool> id);
+        Individu(const Individu& i);
+        Individu();
 
         int getCout() const;
 
@@ -25,6 +26,8 @@ class Individu {
         bool operator==(const Individu &rhs) const;
 
         bool operator!=(const Individu &rhs) const;
+
+        void setId(std::vector<bool> id);
 };
 
 
