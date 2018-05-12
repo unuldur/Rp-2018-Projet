@@ -15,6 +15,7 @@ class Individu {
     public:
         Individu(std::vector<bool> id);
         Individu(const Individu& i);
+        Individu(int cout,std::vector<bool> id);
         Individu();
 
         int getCout() const;

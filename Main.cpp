@@ -176,8 +176,8 @@ void test2(){
 
 void test3(){
     std::vector<int> terminaux;
-    Graph g = Parser::readGraph("../resources/C/c04.stp", &terminaux);
-    /*
+    //Graph g = Parser::readGraph("../resources/C/c04.stp", &terminaux);
+
     const int num_nodes = 9;
     E edge_array[] = { E(0, 1), E(0, 2), E(0, 5), E(0, 7), E(1, 5),
                        E(1, 4), E(1, 8), E(2, 7), E(2, 6), E(2,3),
@@ -190,7 +190,7 @@ void test3(){
     terminaux.push_back(4);
     terminaux.push_back(3);
     terminaux.push_back(2);
-    terminaux.push_back(1);*/
+    terminaux.push_back(1);
      Fitness * f = new SimpleFitness();
     std::vector<Vertex> nT;
     std::vector<Vertex> T;

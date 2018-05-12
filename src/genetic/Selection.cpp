@@ -10,7 +10,7 @@ std::vector<Individu> Selection::select(const std::vector<Individu>& id) const {
 
     srand(time(0));
     int sumFitness = 0;
-    for(Individu i: id){
+    for(const Individu & i: id){
         sumFitness += i.getCout();
     }
     int pos1 = randOne(id, sumFitness);
@@ -25,5 +25,13 @@ std::vector<Individu> Selection::select(const std::vector<Individu>& id) const {
 }
 
 unsigned int Selection::randOne(const std::vector<Individu> &id, int sumFitness) const {
-    return rand() % id.size();
+    double number = (double) rand() / RAND_MAX;
+    int pos = 0;
+    while(number >= 0){
+        double proba = (double) id[pos].getCout() / (double)sumFitness;
+        if(proba >= number) return pos;
+        number -= proba;
+        pos ++;
+    }
+    return 0;
 }
