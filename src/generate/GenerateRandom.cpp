@@ -7,7 +7,6 @@
 
 Individu
 GenerateRandom::generate(const Graph &graph1, const std::vector<Vertex> &T, const std::vector<Vertex> &nT) const {
-    srand(time(NULL));
     std::vector<bool> id;
     for (int j(0); j<nT.size(); ++j) {
         double nombre = 0;

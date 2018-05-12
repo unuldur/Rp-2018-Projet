@@ -17,31 +17,15 @@ std::vector<Individu> Remplacement::remplace(const std::vector<Individu>& id, co
     for (int i(0);i<id.size();++i){
         Individu ind;
         ind.setId(id[i].getId());
-        ind.setCout(f.calculeCout(ind, g, nT));
+        ind.setCout(id[i].getCout());
         tmp.push_back(ind);
     }
     for (int i(0);i<enfants.size();++i){
         Individu ind;
         ind.setId(enfants[i].getId());
-        ind.setCout(f.calculeCout(ind, g, nT));
+        ind.setCout(id[i].getCout());
         tmp.push_back(ind);
     }
-    for(Individu i: tmp){
-        //std::cout << i.getCout() << std::endl;
-    }
-    /*
-    Individu tampon;
-    int v(0);
-    while (v < tmp.size()){
-        for (int i(0) ; i < tmp.size() ; ++i){
-            if (tmp[i].getCout() < tmp[i+1].getCout()){
-                tampon = tmp[i];
-                tmp[i] = tmp[i+1];
-                tmp[i+1] = tampon;
-            }
-        }
-        v++;
-    }*/
     std::sort(tmp.begin(), tmp.end(), sortIndividu);
     std::vector<Individu> res;
     for (int i(0);i<id.size();++i){

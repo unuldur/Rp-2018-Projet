@@ -13,8 +13,6 @@ private:
     double proba;
 public:
     GenerateRandom(double proba);
-
-public:
     Individu generate(const Graph &graph1, const std::vector<Vertex> &T, const std::vector<Vertex> &nT) const override;
 
 };

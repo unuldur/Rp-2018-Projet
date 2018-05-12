@@ -176,8 +176,9 @@ void test2(){
 
 void test3(){
     std::vector<int> terminaux;
-    //Graph g = Parser::readGraph("../resources/C/c04.stp", &terminaux);
+    Graph g = Parser::readGraph("../resources/C/c04.stp", &terminaux);
 
+    /*
     const int num_nodes = 9;
     E edge_array[] = { E(0, 1), E(0, 2), E(0, 5), E(0, 7), E(1, 5),
                        E(1, 4), E(1, 8), E(2, 7), E(2, 6), E(2,3),
@@ -190,7 +191,7 @@ void test3(){
     terminaux.push_back(4);
     terminaux.push_back(3);
     terminaux.push_back(2);
-    terminaux.push_back(1);
+    terminaux.push_back(1);*/
      Fitness * f = new SimpleFitness();
     std::vector<Vertex> nT;
     std::vector<Vertex> T;
@@ -217,9 +218,9 @@ void test3(){
     Generation generation(&rg);
     std::vector<Individu> individus = generation.genere(g, T, nT, 4);
     cout << "individus" << endl;
-    for(Individu i : individus){
-        i.setCout(f->calculeCout(i, g, nT));
-        printIndividu(i);
+    for(int i = 0; i < individus.size(); i++){
+        individus[i].setCout(f->calculeCout(individus[i], g, nT));
+        printIndividu(individus[i]);
         cout << endl;
     }
     Selection selection;
@@ -236,12 +237,12 @@ void test3(){
         printIndividu(i);
         cout << endl;
     }
-    Mutation mutation(0.03);
+    Mutation mutation(0.1);
     mutation.mutate(enfants);
     cout << "enfants mutes" << endl;
-    for(Individu i : enfants){
-        i.setCout(f->calculeCout(i, g, nT));
-        printIndividu(i);
+    for(int i = 0; i < enfants.size(); i++){
+        enfants[i].setCout(f->calculeCout(enfants[i], g, nT));
+        printIndividu(enfants[i]);
         cout << endl;
     }
     Remplacement remplacement;
@@ -253,7 +254,7 @@ void test3(){
     }
 
     Genetic genetic(&generation, &selection, &croisement, &mutation, &remplacement);
-    Individu best  = genetic.algoGenetic(g, T, nT, 200, 50, *f);
+    Individu best  = genetic.algoGenetic(g, T, nT, 300, 50, *f);
     cout << "best  = ";
     printIndividu(best);
 

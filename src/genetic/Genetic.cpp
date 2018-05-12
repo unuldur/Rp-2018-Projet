@@ -14,8 +14,8 @@ Individu Genetic::algoGenetic(const Graph &g, const std::vector<Vertex> &T, cons
                               const int &nbIndividus, const Fitness& f) const{
     std::vector<Individu> id(generation->genere(g, T, nT, nbIndividus));
     std::vector<std::thread> ts;
-    for(Individu i:id){
-        ts.emplace_back(calcFitness1, &i, g, nT, f);
+    for (int k = 0; k < id.size(); ++k) {
+        ts.emplace_back(calcFitness1, &(id[k]), g, nT, f);
     }
     for (int k = 0; k < ts.size(); ++k) {
         ts[k].join();
@@ -28,9 +28,16 @@ Individu Genetic::algoGenetic(const Graph &g, const std::vector<Vertex> &T, cons
             for (int it(0); it<enfant.size();++it){
                 enfants.push_back(enfant[it]);
             }
+        }
+        std::vector<std::thread> tse;
+        for (int k = 0; k < enfants.size(); ++k) {
+            tse.emplace_back(calcFitness1, &(enfants[k]), g, nT, f);
+        }
+        for (int k = 0; k < tse.size(); ++k) {
+            tse[k].join();
+        }
         mutation->mutate(enfants);
         id = remplacement->remplace(id, enfants,f ,g, nT);
-        }
         std::cout << i << " ";
     }
     return id[0];
